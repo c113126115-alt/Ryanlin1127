@@ -1,0 +1,158 @@
+/* --- 1. 基本重置與背景 --- */
+body {
+  font-family: "微軟正黑體", "Helvetica Neue", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fcfcfc; /* 極淺的灰色 */
+  color: #333;
+}
+
+/* --- 2. 頂部導覽列 (不變) --- */
+.navbar {
+  background-color: #478dec; 
+  padding: 15px 0;
+  text-align: center; 
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 20px; 
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* --- 3. 主要排版容器 (不變) --- */
+.main-wrapper {
+  display: flex;
+  max-width: 1000px; /* 稍微縮小總寬度 */
+  margin: 50px auto; 
+  gap: 40px; 
+  padding: 0 20px; 
+  align-items: flex-start; 
+}
+
+/* --- 4. 左側文章區塊 (不變) --- */
+.article-section {
+  flex: 2; /* 佔三分之二的寬度 */
+}
+
+.article-section h1 {
+  font-size: 32px;
+  margin-top: 0;
+  color: #111;
+}
+
+.date {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+.article-section p {
+  line-height: 1.8;
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px; /* 圓角 */
+  margin-top: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* 淡淡的陰影 */
+}
+
+/* --- 5. 右側垂直卡片區塊 (新增翻轉特效) --- */
+.sidebar-gallery {
+  flex: 1; /* 佔三分之一的寬度 */
+  display: flex;
+  flex-direction: column; /* 垂直排列 */
+  gap: 20px; /* 上下間距 */
+}
+
+/* --- 翻轉卡片容器 --- */
+.flip-card {
+  perspective: 1000px; /* 創造 3D 空間感 */
+  width: 100%;
+  height: 200px; /* 固定高度，與原本圖片高度接近 */
+  cursor: pointer; /* 滑鼠移上去顯示手型 */
+}
+
+/* --- 內部包裝器 (這是翻轉的關鍵) --- */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s; /* 翻轉動畫時長 */
+  transform-style: preserve-3d; /* 確保 3D 轉換能正確呈現 */
+}
+
+/* --- 當卡片被點擊 (加上 flipped class) 時翻轉 --- */
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* --- 正反兩面的共同樣式 --- */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* 關鍵：隱藏被翻轉到背面的面 */
+  backface-visibility: hidden; 
+  border-radius: 8px; /* 加上圓角 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden; /* 防止內容溢出 */
+}
+
+/* --- 正面 (圖片) 樣式 --- */
+.flip-card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 確保圖片不變形 */
+}
+
+/* --- 背面 (文字) 樣式 --- */
+.flip-card-back {
+  background-color: #478dec; /* 使用藍色作為背板顏色 */
+  color: white; /* 白字 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 置中文字 */
+  align-items: center;
+  padding: 20px;
+  transform: rotateY(180deg); /* 背面預設翻轉 180 度隱藏 */
+}
+
+.flip-card-back h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.flip-card-back p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* --- 6. 底部版權 (不變) --- */
+footer {
+  text-align: center;
+  padding: 40px 0;
+  color: #777;
+  font-size: 14px;
+}
+
+/* --- 7. 手機版響應式設計 (RWD) (不變) --- */
+@media (max-width: 768px) {
+  .main-wrapper {
+    flex-direction: column; /* 垂直堆疊 */
+  }
+  .article-section, .sidebar-gallery {
+    flex: none;
+    width: 100%;
+  }
+}
